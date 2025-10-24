@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Container } from "@/components/Container";
-import { SectionHeading } from "@/components/SectionHeading";
+import Container from "@/components/Container";
+import SectionHeading from "@/components/SectionHeading";
 import { SocialFeedCard } from "@/components/SocialFeedCard";
 
 export default function MediaFeed({ yt, ig, fb }: any) {
