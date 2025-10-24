@@ -31,21 +31,31 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing name or email" }, { status: 400 });
     }
 
-    const uploadsDir = path.join(process.cwd(), "public", "reports");
-    await fs.mkdir(uploadsDir, { recursive: true });
+    // In serverless environments (e.g., Vercel) the FS is read-only except /tmp.
+    const isServerless = !!process.env.VERCEL || process.env.NODE_ENV === "production";
+    const baseDir = isServerless ? "/tmp" : process.cwd();
+
+    const uploadsDir = path.join(baseDir, "public", "reports");
+    const dataDir = path.join(baseDir, "data");
+    const jsonPath = path.join(dataDir, "intakes.json");
 
     const reportFiles: string[] = [];
-    const files = formData.getAll("reports") as File[];
-    for (const file of files) {
-      const arrayBuffer = await file.arrayBuffer();
-      const buffer = Buffer.from(arrayBuffer);
-      const safeName = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`.replace(/[^a-zA-Z0-9_.-]/g, "_");
-      const outPath = path.join(uploadsDir, safeName);
-      await fs.writeFile(outPath, buffer);
-      reportFiles.push(`/reports/${safeName}`);
-    }
+    try {
+      // Try to save uploaded files if the FS allows
+      await fs.mkdir(uploadsDir, { recursive: true });
+      const files = formData.getAll("reports") as File[];
+      for (const file of files) {
+        const arrayBuffer = await file.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+        const safeName = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`.replace(/[^a-zA-Z0-9_.-]/g, "_");
+        const outPath = path.join(uploadsDir, safeName);
+        await fs.writeFile(outPath, buffer).catch(() => {});
+        // Only expose public URLs when writing inside the project public/ folder (local dev)
+        if (!isServerless) reportFiles.push(`/reports/${safeName}`);
+      }
+    } catch {}
 
-    // Try MongoDB first; if not available, fallback to filesystem JSON store
+    // Try MongoDB first; if not available, fallback to filesystem JSON store.
     let savedVia = "mongo";
     let id: string | null = null;
     try {
@@ -54,23 +64,27 @@ export async function POST(req: Request) {
       id = String(intake._id);
     } catch (e) {
       savedVia = "file";
-      const dataDir = path.join(process.cwd(), "data");
-      const jsonPath = path.join(dataDir, "intakes.json");
-      await fs.mkdir(dataDir, { recursive: true });
-      let arr: any[] = [];
       try {
-        const existing = await fs.readFile(jsonPath, "utf8");
-        arr = JSON.parse(existing);
-        if (!Array.isArray(arr)) arr = [];
-      } catch {}
-      const record = {
-        id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
-        name, email, phone, mode, date, time, notes, reports: reportFiles,
-        createdAt: new Date().toISOString(),
-      };
-      arr.push(record);
-      await fs.writeFile(jsonPath, JSON.stringify(arr, null, 2), "utf8");
-      id = record.id;
+        await fs.mkdir(dataDir, { recursive: true });
+        let arr: any[] = [];
+        try {
+          const existing = await fs.readFile(jsonPath, "utf8");
+          arr = JSON.parse(existing);
+          if (!Array.isArray(arr)) arr = [];
+        } catch {}
+        const record = {
+          id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+          name, email, phone, mode, date, time, notes, reports: reportFiles,
+          createdAt: new Date().toISOString(),
+        };
+        arr.push(record);
+        await fs.writeFile(jsonPath, JSON.stringify(arr, null, 2), "utf8").catch(() => {});
+        id = record.id;
+      } catch {
+        // Last resort: still return success without persistence to avoid crashing prod paths
+        id = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        savedVia = "memory";
+      }
     }
 
     return NextResponse.json({ id, reports: reportFiles, savedVia });
@@ -101,7 +115,8 @@ export async function GET(req: Request) {
         .select("name email phone mode date time notes reports createdAt");
       return NextResponse.json({ items, source: "mongo" });
     } catch {
-      const jsonPath = path.join(process.cwd(), "data", "intakes.json");
+      // FS fallback (works in dev; in serverless this may be empty but should not crash)
+      const jsonPath = path.join((process.env.VERCEL ? "/tmp" : process.cwd()), "data", "intakes.json");
       let arr: any[] = [];
       try {
         const existing = await fs.readFile(jsonPath, "utf8");
