@@ -85,7 +85,7 @@ export default function AboutPage() {
 function JourneyTimeline() {
   const controls = useAnimation();
   const { ref, inView } = useInView({ threshold: 0.2 });
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start 80%", "end 20%"] });
 
   useEffect(() => {
@@ -108,6 +108,11 @@ function JourneyTimeline() {
   }),
 };
 
+  // merge callback ref from useInView with our own ref
+  const setRefs = (node: HTMLDivElement | null) => {
+    containerRef.current = node;
+    (ref as unknown as (instance: Element | null) => void)(node);
+  };
 
   const journey = [
     { year: "2002", title: "PG Diploma in Preventive Healthcare", text: "Apollo Hospital ERF — Hyderabad" },
@@ -125,7 +130,7 @@ function JourneyTimeline() {
   ];
 
   return (
-    <div ref={(node) => { ref(node as any); containerRef.current = node as HTMLDivElement; }} className="relative border-l-2 border-herbal-300 ml-4 pl-6 space-y-10">
+    <div ref={setRefs} className="relative border-l-2 border-herbal-300 ml-4 pl-6 space-y-10">
       {/* animated line grow */}
       <motion.div
         style={{ originY: 0, scaleY: scrollYProgress }}
