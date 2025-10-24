@@ -3,6 +3,8 @@ import Container from "@/components/Container";
 import SectionHeading from "@/components/SectionHeading";
 import {StatCard} from "@/components/StatCard";
 
+export const dynamic = "force-dynamic";
+
 export default function HomePage() {
   return (
     <>
