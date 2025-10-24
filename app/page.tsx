@@ -4,6 +4,7 @@ import SectionHeading from "@/components/SectionHeading";
 import {StatCard} from "@/components/StatCard";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default function HomePage() {
   return (
