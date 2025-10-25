@@ -11,9 +11,12 @@ type StatCardProps = {
 };
 
 export function StatCard({ label, value, endValue, durationMs = 1200, suffix = "" }: StatCardProps) {
-  const [display, setDisplay] = useState<string>(value ?? "");
-
   const target = useMemo(() => (typeof endValue === "number" ? endValue : undefined), [endValue]);
+  const initialDisplay = useMemo(
+    () => (typeof target === "number" ? `0${suffix}` : (value ?? "")),
+    [target, suffix, value]
+  );
+  const [display, setDisplay] = useState<string>(initialDisplay);
 
   useEffect(() => {
     if (typeof target !== "number") return;
