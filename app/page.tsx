@@ -15,8 +15,8 @@ export default function HomePage() {
             subtitle="Evidence-informed, patient-centric healing"
           />
           <div className="grid gap-6 md:grid-cols-3">
-            <StatCard label="Years of Practice" value="20+" />
-            <StatCard label="Patients Served" value="12,000+" />
+            <StatCard label="Years of Practice" endValue={25} suffix="+" />
+            <StatCard label="Patients Served" endValue={50000} />
             <StatCard label="Workshops Conducted" value="75+" />
           </div>
         </Container>
