@@ -13,7 +13,7 @@ export default function Navbar() {
           <div className="relative h-10 w-10 rounded-full overflow-hidden ring-2 ring-white/20 transition transform group-hover:scale-105 group-hover:brightness-110 group-hover:shadow-[0_0_18px_rgba(255,255,255,0.35)]">
             <Image src="/drnavinmain.jpg" alt="Dr. Navin Joshi" fill sizes="40px" className="object-cover" />
           </div>
-          <span className="text-xl font-semibold tracking-wide">Dr. Navin Joshi</span>
+          <span className="text-lg md:text-xl font-semibold tracking-wide">Dr. Navin Joshi</span>
         </Link>
         <button
           type="button"
@@ -25,7 +25,7 @@ export default function Navbar() {
             <path d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
-        <ul className="hidden md:flex space-x-7 text-base">
+        <ul className="hidden md:flex space-x-5 text-sm md:text-base">
           <li><Link href="/">Home</Link></li>
           <li><Link href="/marketing/about">About</Link></li>
           <li><Link href="/marketing/workshops">Workshops</Link></li>

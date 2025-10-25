@@ -10,6 +10,11 @@ export const metadata: Metadata = {
     "Official website of Dr. Navin Joshi — Ayurvedic Physician offering holistic consultations, workshops, and integrative care.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const dynamic = "auto";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
