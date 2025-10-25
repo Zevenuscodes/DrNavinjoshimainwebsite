@@ -1,5 +1,6 @@
 import Container from "@/components/Container";
 import SectionHeading from "@/components/SectionHeading";
+import ImageSlideshow from "@/components/ImageSlideshow";
 import { EventCard } from "@/components/EventCard";
 
 export default function Workshops() {
@@ -45,11 +46,19 @@ export default function Workshops() {
         <div className="mt-16">
           <SectionHeading title="Offline Workshops" subtitle="In-person learning and hands-on practice" />
           <div className="grid md:grid-cols-2 gap-8 items-start">
-            {/* Brochure */}
-            <div className="card overflow-hidden">
-              <img src="/blr workshop_page-0001.jpg" alt="Bengaluru Workshop Brochure Page 1" className="w-full h-auto object-cover" />
-              <img src="/blr workshop_page-0002.jpg" alt="Bengaluru Workshop Brochure Page 2" className="w-full h-auto object-cover border-t" />
-              <div className="p-4 flex items-center justify-between">
+            {/* Slideshow of brochure images */}
+            <div className="card overflow-hidden p-4">
+              <ImageSlideshow
+                images={[
+                  { src: "/BLR1.jpg", alt: "Bengaluru Workshop - Image 1" },
+                  { src: "/BLR 2.jpg", alt: "Bengaluru Workshop - Image 2" },
+                  { src: "/BLR 3.jpg", alt: "Bengaluru Workshop - Image 3" },
+                ]}
+                width={4}
+                height={5}
+                roundedClassName="rounded-xl"
+              />
+              <div className="mt-4">
                 <a
                   href="https://forms.gle/k5QCrEDCuRR2RAyp9"
                   target="_blank"
