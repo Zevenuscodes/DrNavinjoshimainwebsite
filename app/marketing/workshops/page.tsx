@@ -50,9 +50,9 @@ export default function Workshops() {
             <div className="card overflow-hidden p-4">
               <ImageSlideshow
                 images={[
-                  { src: "/BLR1.jpg", alt: "Bengaluru Workshop - Image 1" },
-                  { src: "/BLR%202.jpg", alt: "Bengaluru Workshop - Image 2" },
-                  { src: "/BLR%203.jpg", alt: "Bengaluru Workshop - Image 3" },
+                  { src: "/BLR1.jpg?v=2", alt: "Bengaluru Workshop - Image 1" },
+                  { src: "/BLR%202.jpg?v=2", alt: "Bengaluru Workshop - Image 2" },
+                  { src: "/BLR%203.jpg?v=2", alt: "Bengaluru Workshop - Image 3" },
                 ]}
                 width={4}
                 height={5}
