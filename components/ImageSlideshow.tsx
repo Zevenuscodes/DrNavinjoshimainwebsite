@@ -42,8 +42,9 @@ export default function ImageSlideshow({
   return (
     <div
       className={`relative w-full overflow-hidden ${roundedClassName} shadow-lg`}
-      style={{ aspectRatio: `${width}/${height}` }}
     >
+      {/* Aspect ratio sizer to ensure height in all browsers */}
+      <div aria-hidden="true" style={{ paddingTop: `${(height / width) * 100}%` }} />
       <AnimatePresence mode="wait">
         <motion.div
           key={slides[index].src}
