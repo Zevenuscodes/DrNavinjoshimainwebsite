@@ -13,7 +13,7 @@ export default function Contact() {
             <h3 className="text-lg font-semibold">Clinic Address</h3>
             <p>Lane 4, C Block, Saraswati Vihar, Ajabpur Khurd, Dehradun</p>
             <p><span className="font-medium">Phone:</span> +91-9410379397</p>
-            <p><span className="font-medium">Email:</span> ayushdarpan@gmail.com</p>
+            <p><span className="font-medium">Email:</span> nchjoshi@gmail.com</p>
             <div className="aspect-video w-full rounded-xl overflow-hidden">
               <iframe
                 title="Clinic Location"
