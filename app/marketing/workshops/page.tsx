@@ -56,6 +56,7 @@ export default function Workshops() {
                 ]}
                 width={4}
                 height={5}
+                fit="contain"
                 roundedClassName="rounded-xl"
               />
               <div className="mt-4">

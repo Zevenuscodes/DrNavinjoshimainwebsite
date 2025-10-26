@@ -10,6 +10,7 @@ interface ImageSlideshowProps {
   width?: number; // used only to compute aspect ratio
   height?: number; // used only to compute aspect ratio
   roundedClassName?: string;
+  fit?: "cover" | "contain";
 }
 
 export default function ImageSlideshow({
@@ -18,6 +19,7 @@ export default function ImageSlideshow({
   width = 4,
   height = 3,
   roundedClassName = "rounded-2xl",
+  fit = "cover",
 }: ImageSlideshowProps) {
   const slides = useMemo(
     () =>
@@ -59,7 +61,7 @@ export default function ImageSlideshow({
             alt={slides[index].alt}
             fill
             sizes="(min-width: 1024px) 600px, (min-width: 768px) 50vw, 100vw"
-            className="object-cover"
+            className={fit === "contain" ? "object-contain" : "object-cover"}
             priority
           />
         </motion.div>
