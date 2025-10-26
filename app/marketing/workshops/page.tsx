@@ -51,8 +51,8 @@ export default function Workshops() {
               <ImageSlideshow
                 images={[
                   { src: "/BLR1.jpg", alt: "Bengaluru Workshop - Image 1" },
-                  { src: "/BLR 2.jpg", alt: "Bengaluru Workshop - Image 2" },
-                  { src: "/BLR 3.jpg", alt: "Bengaluru Workshop - Image 3" },
+                  { src: "/BLR%202.jpg", alt: "Bengaluru Workshop - Image 2" },
+                  { src: "/BLR%203.jpg", alt: "Bengaluru Workshop - Image 3" },
                 ]}
                 width={4}
                 height={5}
