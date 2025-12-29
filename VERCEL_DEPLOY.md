@@ -58,7 +58,7 @@ vercel --prod
 ## Verify Changes
 
 After redeploying, check:
-- Visit: `https://your-domain.com/marketing/workshops`
+- Visit: `https://your-domain.com/workshops`
 - Scroll down to "Offline Workshops" section
 - You should see the new workshop details
 

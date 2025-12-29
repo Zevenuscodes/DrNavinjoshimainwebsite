@@ -27,10 +27,10 @@ export default function Navbar() {
         </button>
         <ul className="hidden md:flex space-x-5 text-sm md:text-base">
           <li><Link href="/">Home</Link></li>
-          <li><Link href="/marketing/about">About</Link></li>
-          <li><Link href="/marketing/workshops">Workshops</Link></li>
-          <li><Link href="/marketing/media">Media</Link></li>
-          <li><Link href="/marketing/contact">Contact</Link></li>
+          <li><Link href="/about">About</Link></li>
+          <li><Link href="/workshops">Workshops</Link></li>
+          <li><Link href="/media">Media</Link></li>
+          <li><Link href="/contact">Contact</Link></li>
           <li><Link href="/admin">Admin</Link></li>
         </ul>
       </div>
@@ -38,10 +38,10 @@ export default function Navbar() {
         <div className="md:hidden border-t border-white/10">
           <ul className="px-6 py-3 space-y-3 text-base">
             <li><Link href="/" onClick={() => setOpen(false)}>Home</Link></li>
-            <li><Link href="/marketing/about" onClick={() => setOpen(false)}>About</Link></li>
-            <li><Link href="/marketing/workshops" onClick={() => setOpen(false)}>Workshops</Link></li>
-            <li><Link href="/marketing/media" onClick={() => setOpen(false)}>Media</Link></li>
-            <li><Link href="/marketing/contact" onClick={() => setOpen(false)}>Contact</Link></li>
+            <li><Link href="/about" onClick={() => setOpen(false)}>About</Link></li>
+            <li><Link href="/workshops" onClick={() => setOpen(false)}>Workshops</Link></li>
+            <li><Link href="/media" onClick={() => setOpen(false)}>Media</Link></li>
+            <li><Link href="/contact" onClick={() => setOpen(false)}>Contact</Link></li>
             <li><Link href="/admin" onClick={() => setOpen(false)}>Admin</Link></li>
           </ul>
         </div>
