@@ -14,6 +14,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "scontent.xx.fbcdn.net", // Facebook CDN
       },
+      {
+        protocol: "https",
+        hostname: "firebasestorage.googleapis.com", // ✅ Firebase Storage
+      },
+      {
+        protocol: "https",
+        hostname: "*.firebasestorage.googleapis.com", // ✅ Firebase Storage (wildcard)
+      },
     ],
   },
 };

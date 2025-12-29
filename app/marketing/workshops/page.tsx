@@ -42,79 +42,76 @@ export default function Workshops() {
           />
         </div>
 
-        {/* Offline Workshops Section */}
+        {/* Featured Programs Section */}
         <div className="mt-16">
-          <SectionHeading title="Offline Workshops" subtitle="In-person learning and hands-on practice" />
-          <div className="grid md:grid-cols-2 gap-8 items-start">
-            {/* Slideshow of brochure images */}
-            <div className="card overflow-hidden p-4">
-              <ImageSlideshow
-                images={[
-                  { src: "/BLR1.jpg?v=3", alt: "Bengaluru Workshop - Image 1" },
-                  { src: "/BLR2.jpg?v=3", alt: "Bengaluru Workshop - Image 2" },
-                  { src: "/BLR3.jpg?v=3", alt: "Bengaluru Workshop - Image 3" },
-                ]}
-                width={4}
-                height={5}
-                fit="contain"
-                roundedClassName="rounded-xl"
-              />
-              <div className="mt-4">
-                <a
-                  href="https://forms.gle/k5QCrEDCuRR2RAyp9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary"
-                >
-                  Enroll Now
-                </a>
-              </div>
+          <SectionHeading title="Featured Programs" subtitle="Comprehensive learning experiences" />
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="card p-6 space-y-4">
+              <h3 className="text-2xl font-semibold text-herbal-800">🌿 In-Person Workshops</h3>
+              <p className="text-gray-700">
+                Join Dr. Navin Joshi for immersive, hands-on workshops conducted in various cities across India. 
+                Experience traditional Ayurvedic practices in a modern, accessible format.
+              </p>
+              <ul className="space-y-2 text-gray-800">
+                <li className="flex items-start gap-2">
+                  <span className="text-herbal-600 mt-1">✓</span>
+                  <span>Interactive sessions with live demonstrations</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-herbal-600 mt-1">✓</span>
+                  <span>Small group sizes for personalized attention</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-herbal-600 mt-1">✓</span>
+                  <span>Certificates of completion</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-herbal-600 mt-1">✓</span>
+                  <span>Networking opportunities with practitioners</span>
+                </li>
+              </ul>
+              <a
+                href={`https://wa.me/${phone}?text=${encodeURIComponent("Hi, I'm interested in learning about in-person workshops.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-block"
+              >
+                Get More Information
+              </a>
             </div>
 
-            {/* Interactive Message */}
             <div className="card p-6 space-y-4">
-              <h3 className="text-xl font-semibold">🌿✨ International Conference on Ayurveda – Bengaluru 2025! ✨🌿</h3>
-
+              <h3 className="text-2xl font-semibold text-herbal-800">💻 Online Learning</h3>
+              <p className="text-gray-700">
+                Access world-class Ayurvedic education from anywhere. Our online programs combine 
+                recorded sessions, live Q&A, and comprehensive study materials.
+              </p>
               <ul className="space-y-2 text-gray-800">
-                <li>📅 <strong>8th & 9th November 2025</strong></li>
-                <li>📍 Green Path Organic Restaurant, Rajeev Gandhi Circle, Malleshwara, Bengaluru</li>
+                <li className="flex items-start gap-2">
+                  <span className="text-herbal-600 mt-1">✓</span>
+                  <span>Learn at your own pace</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-herbal-600 mt-1">✓</span>
+                  <span>Access from any device, anywhere</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-herbal-600 mt-1">✓</span>
+                  <span>Lifetime access to course materials</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-herbal-600 mt-1">✓</span>
+                  <span>Regular updates and new content</span>
+                </li>
               </ul>
-
-              {/* Bullet list + floating QR side-by-side */}
-              <div className="md:flex md:items-start md:gap-6">
-                <ul className="flex-1 space-y-2 text-gray-800">
-                  <li className="pt-2">💫 Join <strong>Renowned Ayurvedacharya, researcher and academician</strong> with vast clinical experience — in an exclusive, hands-on & knowledge-rich conference on:</li>
-                  <li className="pl-4">🔸 Marma Therapy</li>
-                  <li className="pl-4">🔸 Viddha–Agnikarma</li>
-                  <li className="pl-4">🔸 Nadi Pariksha</li>
-                  <li className="pl-4">🔸 Clinical Ayurveda</li>
-                </ul>
-                <a
-                  href="https://forms.gle/k5QCrEDCuRR2RAyp9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 md:mt-0 shrink-0 bg-white/90 backdrop-blur p-2 rounded-xl shadow-lg border inline-block md:sticky md:top-4"
-                  aria-label="Scan to Register"
-                >
-                  <img
-                    src={`https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent('https://forms.gle/k5QCrEDCuRR2RAyp9')}`}
-                    alt="Register QR Code"
-                    width={140}
-                    height={140}
-                    className="rounded"
-                  />
-                </a>
-              </div>
-
-              <ul className="space-y-2 text-gray-800">
-                <li className="pt-2">🎯 Learn • Experience • Elevate your Ayurvedic Practice!</li>
-                <li>⚡ <strong>Limited Seats! Registration closing soon!</strong></li>
-                <li>📞 Call / WhatsApp: <strong>+91 9410379397</strong></li>
-                <li>🔗 Register Now: <a className="text-herbal-700 underline" href="https://forms.gle/k5QCrEDCuRR2RAyp9" target="_blank" rel="noopener noreferrer">forms.gle/k5QCrEDCuRR2RAyp9</a></li>
-                <li>📲 Or simply <strong>SCAN the QR CODE</strong> to register instantly!</li>
-                <li>🌸 Organized by Ayush Darpan Foundation & Himayu Care</li>
-                <li>🌿 Spreading Health Awareness Across the Globe 🌿</li>
-              </ul>
+              <a
+                href={`https://wa.me/${phone}?text=${encodeURIComponent("Hi, I'm interested in online learning programs.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-block"
+              >
+                Explore Online Courses
+              </a>
             </div>
           </div>
         </div>

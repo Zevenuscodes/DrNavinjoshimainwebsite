@@ -11,6 +11,7 @@ interface ImageSlideshowProps {
   height?: number; // used only to compute aspect ratio
   roundedClassName?: string;
   fit?: "cover" | "contain";
+  useFirestore?: boolean; // If true, fetch images from Firestore
 }
 
 export default function ImageSlideshow({
@@ -20,16 +21,48 @@ export default function ImageSlideshow({
   height = 3,
   roundedClassName = "rounded-2xl",
   fit = "cover",
+  useFirestore = false,
 }: ImageSlideshowProps) {
-  const slides = useMemo(
-    () =>
-      images ?? [
-        { src: "/drnavinmain.jpg", alt: "Dr. Navin Joshi" },
-        { src: "/pic2.jpg", alt: "Clinic photo" },
-        { src: "/pic3.jpg", alt: "Workshop photo" },
-      ],
-    [images]
-  );
+  const [firestoreImages, setFirestoreImages] = useState<{ src: string; alt: string }[] | null>(null);
+  
+  // Fetch from API if useFirestore is true
+  useEffect(() => {
+    if (useFirestore && !images) {
+      fetch("/api/homepage")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.content?.slideshowImages && data.content.slideshowImages.length > 0) {
+            setFirestoreImages(data.content.slideshowImages);
+          } else {
+            // Fallback to default images
+            setFirestoreImages([
+              { src: "/drnavinmain.jpg", alt: "Dr. Navin Joshi" },
+              { src: "/pic2.jpg", alt: "Clinic photo" },
+              { src: "/pic3.jpg", alt: "Workshop photo" },
+            ]);
+          }
+        })
+        .catch(() => {
+          // Fallback on error
+          setFirestoreImages([
+            { src: "/drnavinmain.jpg", alt: "Dr. Navin Joshi" },
+            { src: "/pic2.jpg", alt: "Clinic photo" },
+            { src: "/pic3.jpg", alt: "Workshop photo" },
+          ]);
+        });
+    }
+  }, [useFirestore, images]);
+  
+  const slides = useMemo(() => {
+    if (images) return images;
+    if (firestoreImages) return firestoreImages;
+    // Default fallback
+    return [
+      { src: "/drnavinmain.jpg", alt: "Dr. Navin Joshi" },
+      { src: "/pic2.jpg", alt: "Clinic photo" },
+      { src: "/pic3.jpg", alt: "Workshop photo" },
+    ];
+  }, [images, firestoreImages]);
 
   const [index, setIndex] = useState(0);
 

@@ -26,7 +26,7 @@ export default function Hero() {
           </div>
 
           <div className="relative w-full max-w-[720px] ml-auto">
-            <ImageSlideshow width={4} height={3} roundedClassName="rounded-2xl" />
+            <ImageSlideshow width={4} height={3} roundedClassName="rounded-2xl" useFirestore={true} />
           </div>
         </div>
       </Container>
