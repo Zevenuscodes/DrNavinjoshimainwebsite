@@ -2,6 +2,7 @@ import Container from "@/components/Container";
 import SectionHeading from "@/components/SectionHeading";
 import ImageSlideshow from "@/components/ImageSlideshow";
 import { EventCard } from "@/components/EventCard";
+import Image from "next/image";
 
 export default function Workshops() {
   const phone = "919410379397"; // WhatsApp target
@@ -51,6 +52,20 @@ export default function Workshops() {
               <p className="text-lg text-herbal-700">🌿 Ayush Darpan Foundation®️ & Himayu Care®️ Present 🌿</p>
               <h3 className="text-3xl font-bold text-herbal-900">🎓 12th Two-Day Residential Workshop</h3>
               <p className="text-gray-700 italic">🪔 A rare opportunity to learn under the guidance of Ayurveda masters</p>
+            </div>
+
+            {/* Workshop Image */}
+            <div className="flex justify-center my-6">
+              <div className="relative w-full max-w-2xl rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src="/doon.jpeg"
+                  alt="12th Two-Day Residential Workshop - Dehradun"
+                  width={1200}
+                  height={800}
+                  className="w-full h-auto object-cover"
+                  priority
+                />
+              </div>
             </div>
 
             <div className="border-t border-b border-herbal-200 py-4">
