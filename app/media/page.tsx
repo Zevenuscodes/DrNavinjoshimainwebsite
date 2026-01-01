@@ -73,7 +73,7 @@ export default function MediaFeed() {
         </div>
         <div className="text-center mt-10">
           <a
-            href="https://www.youtube.com/@ayushdarpan"
+            href="https://www.youtube.com/@drnavinjoshi"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-6 py-3 bg-herbal-700 text-white rounded-xl shadow hover:bg-herbal-900 transition"
@@ -88,7 +88,7 @@ export default function MediaFeed() {
         <SectionHeading title="Follow Us" subtitle="Stay connected on social media" />
         <div className="flex items-center justify-center gap-6 mt-2">
           <a
-            href="https://www.instagram.com/drnavinjoshi"
+            href="https://www.instagram.com/ayushdarpan/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
