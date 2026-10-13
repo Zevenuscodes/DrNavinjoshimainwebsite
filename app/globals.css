@@ -26,5 +26,16 @@ body {
 
   .input { @apply w-full rounded-xl border border-herbal-100 bg-white px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-herbal-700; }
 
+  .float-note { animation: float-note 3s ease-in-out infinite; }
+
   .badge { @apply inline-block rounded-full bg-herbal-100 text-herbal-700 px-3 py-1 text-xs font-medium; }
+}
+
+@keyframes float-note {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-note { animation: none; }
 }

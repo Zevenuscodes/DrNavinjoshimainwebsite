@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { dbConnect } from "@/lib/mongo";
 import Intake from "@/models/Intake";
+import { sendBookingWhatsApp } from "@/lib/whatsapp";
+import { sendBookingEmail } from "@/lib/email";
 import { promises as fs } from "fs";
 import path from "path";
 
@@ -40,13 +42,15 @@ export async function POST(req: Request) {
     const jsonPath = path.join(dataDir, "intakes.json");
 
     const reportFiles: string[] = [];
+    const attachments: { filename: string; content: Buffer }[] = [];
     try {
       // Try to save uploaded files if the FS allows
-      await fs.mkdir(uploadsDir, { recursive: true });
+      await fs.mkdir(uploadsDir, { recursive: true }).catch(() => {});
       const files = formData.getAll("reports") as File[];
       for (const file of files) {
         const arrayBuffer = await file.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
+        if (buffer.length) attachments.push({ filename: file.name, content: buffer });
         const safeName = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`.replace(/[^a-zA-Z0-9_.-]/g, "_");
         const outPath = path.join(uploadsDir, safeName);
         await fs.writeFile(outPath, buffer).catch(() => {});
@@ -87,7 +91,14 @@ export async function POST(req: Request) {
       }
     }
 
-    return NextResponse.json({ id, reports: reportFiles, savedVia });
+    // Alert the clinic by email and WhatsApp. Awaited so serverless doesn't cut them off; never fails the booking.
+    const details = { name, phone, email, mode, date, time, notes };
+    const [emailed, whatsapped] = await Promise.all([
+      sendBookingEmail({ ...details, attachments }),
+      sendBookingWhatsApp(details),
+    ]);
+
+    return NextResponse.json({ id, reports: reportFiles, savedVia, notified: { email: emailed, whatsapp: whatsapped } });
   } catch (e) {
     console.error("POST /api/intake error", e);
     return NextResponse.json({ error: "Failed to save" }, { status: 500 });

@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, useState } from 'react';
+import PaymentNote from '@/components/PaymentNote';
 
 export function BookingForm() {
   const [loading, setLoading] = useState(false);
@@ -61,6 +62,7 @@ export function BookingForm() {
         <input className="input" type="file" multiple accept=".pdf,.jpg,.jpeg,.png" />
       </div>
       <button disabled={loading || !canPay} className="btn-primary w-full">{loading ? 'Saving…' : 'Pay Now'}</button>
+      <PaymentNote />
     </form>
   );
 }

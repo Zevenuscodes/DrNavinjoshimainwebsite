@@ -2,6 +2,7 @@
 
 import Container from "@/components/Container";
 import ImageSlideshow from "@/components/ImageSlideshow";
+import PaymentNote from "@/components/PaymentNote";
 
 export default function Hero() {
   return (
@@ -23,6 +24,7 @@ export default function Hero() {
             >
               Book Consultation
             </a>
+            <PaymentNote className="mt-6 max-w-md" />
           </div>
 
           <div className="relative w-full max-w-[720px] ml-auto">
