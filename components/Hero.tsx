@@ -18,13 +18,15 @@ export default function Hero() {
               Personalized treatments, lifestyle guidance, and restorative therapies blending
               classical wisdom with modern care.
             </p>
-            <a
-              href="/consultation"
-              className="inline-block mt-8 px-6 py-3 bg-herbal-700 text-white rounded-xl shadow hover:bg-herbal-900 transition"
-            >
-              Book Consultation
-            </a>
-            <PaymentNote className="mt-6 max-w-md" />
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href="/consultation"
+                className="inline-block shrink-0 px-6 py-3 bg-herbal-700 text-white rounded-xl shadow hover:bg-herbal-900 transition"
+              >
+                Book Consultation
+              </a>
+              <PaymentNote className="flex-1 min-w-[16rem] max-w-sm" />
+            </div>
           </div>
 
           <div className="relative w-full max-w-[720px] ml-auto">
